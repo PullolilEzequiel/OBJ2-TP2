@@ -1,3 +1,7 @@
+package empresa;
+
+import empleado.Empleado;
+
 import java.util.ArrayList;
 
 public class Empresa {
@@ -9,6 +13,7 @@ public class Empresa {
         this.nombre = nombre;
         this.CUIT = CUIT;
         this.detalle_renumeracion = detalle_renumeracion;
+        this.empleados = new ArrayList<Empleado>();
     }
 
 
@@ -37,7 +42,7 @@ public class Empresa {
         Double montoTotal = (double) 0;
 
         for (Empleado empleado : this.empleados) {
-            montoTotal += empleado.getSueldoBruto();
+            montoTotal += empleado.getSueldoBruto(detalle_renumeracion);
         }
 
         return  montoTotal;

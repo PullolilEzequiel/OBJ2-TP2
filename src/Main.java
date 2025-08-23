@@ -1,12 +1,24 @@
+import empleado.EmpleadoPermanente;
+import empleado.EstadoCivil;
+import empresa.DetallesDeRenumeracion;
+import empresa.Empresa;
+
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Random;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        Empleado test = new EmpleadoTemporal("Ezequiel", 100f, "Av. Mitre", new GregorianCalendar(2002, 3, 5));
-        System.out.println(test.getEdad());
 
-        System.out.println(test.getSueldoBruto());
+
+    public static void main(String[] args) {
+
+
+
+
     }
+
+
 }
