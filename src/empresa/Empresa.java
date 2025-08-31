@@ -3,12 +3,15 @@ package empresa;
 import empleado.Empleado;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Empresa {
     private String nombre;
     private String CUIT;
     private ArrayList<Empleado> empleados;
     private DetallesDeRenumeracion detalle_renumeracion;
+
+    private ArrayList<ReciboDeHaberes> recibos_de_haberes = new ArrayList<>();
     public Empresa(String nombre, String CUIT, DetallesDeRenumeracion detalle_renumeracion){
         this.nombre = nombre;
         this.CUIT = CUIT;
@@ -56,5 +59,25 @@ public class Empresa {
         }
 
         return  montoTotal;
+    }
+
+    public void liquidarSueldos(){
+        for(Empleado empleado: this.empleados){
+            Double sueldo_neto = empleado.getSueldoNeto(detalle_renumeracion);
+            Double sueld_bruto = empleado.getSueldoBruto(detalle_renumeracion);
+            ReciboDeHaberes recibo_tmp = new ReciboDeHaberes(empleado.getNombre(), empleado.getDireccion(), sueld_bruto, sueldo_neto);
+            this.recibos_de_haberes.add(recibo_tmp);
+        }
+    }
+
+    public boolean liquidoSueldoDe(Empleado empleado){
+
+        for(ReciboDeHaberes recibo: this.recibos_de_haberes){
+            if (Objects.equals(recibo.getNombre(), empleado.getNombre())){
+                return true;
+            }
+        }
+
+        return  false;
     }
 }

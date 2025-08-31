@@ -4,8 +4,10 @@
       <w>aporte</w>
       <w>casado</w>
       <w>designacion</w>
+      <w>enunciado</w>
       <w>monto</w>
       <w>renumeracion</w>
+      <w>soltero</w>
     </words>
   </dictionary>
 </component>
