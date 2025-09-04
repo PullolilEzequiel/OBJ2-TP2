@@ -15,7 +15,7 @@ public class DetallesDeRenumeracion {
     private  Double aporte_social_empleado_temporal;
     private  Double aporte_social_por_hijo;
     private  Double jubilacionAdicionalPorHora;
-
+    private  Double gastos_administrativos;
 
     public DetallesDeRenumeracion(Double adicionalPorHora,
                                   Double asignacionPorHijo,
@@ -26,7 +26,8 @@ public class DetallesDeRenumeracion {
                                   Double aporteSocialEmpleadoPermanente,
                                   Double aporteSocialEmpleadoTemporal,
                                   Double aporte_social_por_hijo,
-                                  Double jubilacion_adicional_por_hora){
+                                  Double jubilacion_adicional_por_hora,
+                                  Double gastos_administrativos){
         this.adicional_por_hora = adicionalPorHora;
         this.asignacion_por_hijo = asignacionPorHijo;
         this.asignacion_por_conyuge = asignacionPorConyuge;
@@ -37,10 +38,13 @@ public class DetallesDeRenumeracion {
         this.aporte_social_empleado_temporal = aporteSocialEmpleadoTemporal;
         this.aporte_social_por_hijo = aporte_social_por_hijo;
         this.jubilacionAdicionalPorHora = jubilacion_adicional_por_hora;
+        this.gastos_administrativos = gastos_administrativos;
     }
 
 
-
+    public Double getGastosAdministrativos(){
+        return  this.gastos_administrativos;
+    }
     public Double asignacionPorhijo(EmpleadoPermanente empleadoPermanente){
         if(empleadoPermanente.getEstadoCivil().estaCasado()){
             return this.asignacion_por_conyuge;

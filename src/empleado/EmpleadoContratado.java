@@ -26,6 +26,6 @@ public class EmpleadoContratado extends Empleado{
 
     @Override
     public Double getRetencionDeSueldo(DetallesDeRenumeracion detalle_renumeracion) {
-        return 50.0;
+        return detalle_renumeracion.getGastosAdministrativos();
     }
 }

@@ -21,7 +21,8 @@ public class Main {
             0.10,
             0.10,
             20.0,
-            5.0
+            5.0,
+            50.0
     );
 
     private static final Empresa empresa_enunciado= new Empresa("Empresa enunciado", "20441113339", renumeracionEnunciado);
