@@ -33,17 +33,17 @@ public class EmpleadoTemporal extends Empleado {
 
     @Override
     public Double getAporteJubilatorio(DetallesDeRenumeracion detalle_renumeracion) {
-        return detalle_renumeracion.getAporteJubilatorioTemporal(this.getSueldoBruto(detalle_renumeracion), this.horas_extra);
+        return detalle_renumeracion.getAporteJubilatorio(this);
     }
 
     @Override
     public Double getAporteObraSocial(DetallesDeRenumeracion detalle_renumeracion) {
-        return detalle_renumeracion.getAporteSocialTemporal(this.getSueldoBruto(detalle_renumeracion), this.anios_aporte);
+        return detalle_renumeracion.getAporteSocial(this);
     }
 
     @Override
     public Double getSueldoFamiliar(DetallesDeRenumeracion detalle_renumeracion) {
-        return detalle_renumeracion.getAdicionalPorHora(this.horas_extra);
+        return detalle_renumeracion.getAdicionalPorHora(this);
     }
 
     @Override
@@ -52,4 +52,11 @@ public class EmpleadoTemporal extends Empleado {
     }
 
 
+    public Double getHorasExtra() {
+        return this.horas_extra;
+    }
+
+    public int getAniosAporte() {
+        return  this.anios_aporte;
+    }
 }

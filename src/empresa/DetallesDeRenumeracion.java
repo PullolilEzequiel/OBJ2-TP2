@@ -1,5 +1,6 @@
 package empresa;
 
+import empleado.EmpleadoTemporal;
 import empleado.EstadoCivil;
 
 public class DetallesDeRenumeracion {
@@ -38,16 +39,9 @@ public class DetallesDeRenumeracion {
     }
 
 
-    public Double getAporteSocialTemporal(Double sueldo, Integer anios_de_aporte){
-        return (sueldo * aporte_social_empleado_temporal) + ((anios_de_aporte >= 50) ? adicional_por_antiguedad : 0);
-    }
 
     public Double getAporteSocialPermanente(Double sueldoBruto, Integer cantHijos) {
         return (sueldoBruto * this.aporte_social_empleado_permanente) + (cantHijos * aporte_social_por_hijo);
-    }
-
-    public Double getAporteJubilatorioTemporal(Double sueldoBruto, Double horasExtra) {
-        return  (sueldoBruto * aporte_jubilatorio_planta_temporal) + (horasExtra * jubilacionAdicionalPorHora);
     }
 
     public Double getAsignacionPorHijo(Integer cant_hijos) {
@@ -62,8 +56,8 @@ public class DetallesDeRenumeracion {
         return (double) 0;
     }
 
-    public Double getAdicionalPorHora(Double horas_extra){
-        return  (horas_extra * adicional_por_hora);
+    public Double getAdicionalPorHora(EmpleadoTemporal empleadoTemporal){
+        return  (empleadoTemporal.getHorasExtra() * adicional_por_hora);
     }
     public Double getAporteJubilatorioPermanente(Double sueldoBruto) {
         return  (sueldoBruto * this.aporte_jubilatorio_planta_permanente);
@@ -73,4 +67,14 @@ public class DetallesDeRenumeracion {
     public  Double getAportePorAntiguedad(Integer antiguedad){
         return  antiguedad * adicional_por_antiguedad;
     }
+
+    public Double getAporteJubilatorio(EmpleadoTemporal empleadoTemporal) {
+        return (empleadoTemporal.getSueldoBruto(this) * aporte_jubilatorio_planta_temporal) + (empleadoTemporal.getHorasExtra() * jubilacionAdicionalPorHora);
+    }
+    public Double getAporteSocial(EmpleadoTemporal empleadoTemporal) {
+        //return (sueldo * aporte_social_empleado_temporal) + ((anios_de_aporte >= 50) ? adicional_por_antiguedad : 0);
+        return (empleadoTemporal.getSueldoBruto(this) * aporte_social_empleado_temporal) + ((empleadoTemporal.getAniosAporte() >= 50) ? adicional_por_antiguedad : 0);
+    }
+
+
 }
