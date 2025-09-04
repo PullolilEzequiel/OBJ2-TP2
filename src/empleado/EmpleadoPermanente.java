@@ -32,17 +32,18 @@ public class EmpleadoPermanente extends  Empleado{
 
     @Override
     public Double getAporteJubilatorio(DetallesDeRenumeracion detalle_renumeracion) {
-        return detalle_renumeracion.getAporteJubilatorioPermanente(this.getSueldoBruto(detalle_renumeracion));
+        return detalle_renumeracion.getAporteJubilatorio(this);
     }
 
     @Override
     public Double getAporteObraSocial(DetallesDeRenumeracion detalle_renumeracion) {
-        return detalle_renumeracion.getAporteSocialPermanente(this.getSueldoBruto(detalle_renumeracion), this.cantHijos);
+        return detalle_renumeracion.getAporteSocial(this);
     }
 
     @Override
     public Double getSueldoFamiliar(DetallesDeRenumeracion detalle_renumeracion) {
-        return detalle_renumeracion.getAsignacionPorHijo(this.cantHijos) + detalle_renumeracion.getAdicionalPorConyuge(this.getEstadoCivil()) + detalle_renumeracion.getAportePorAntiguedad(this.antiguedad);
+        return detalle_renumeracion.getSueldoFamiliar(this);
+        // return detalle_renumeracion.getAsignacionPorHijo(this.cantHijos) + detalle_renumeracion.getAdicionalPorConyuge(this.getEstadoCivil()) + detalle_renumeracion.getAportePorAntiguedad(this.antiguedad);
     }
 
     @Override
@@ -51,4 +52,11 @@ public class EmpleadoPermanente extends  Empleado{
     }
 
 
+    public int getCantidadHijos() {
+        return  this.cantHijos;
+    }
+
+    public int getAntiguedad() {
+        return this.antiguedad;
+    }
 }

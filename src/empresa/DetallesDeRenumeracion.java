@@ -1,5 +1,6 @@
 package empresa;
 
+import empleado.EmpleadoPermanente;
 import empleado.EmpleadoTemporal;
 import empleado.EstadoCivil;
 
@@ -40,16 +41,8 @@ public class DetallesDeRenumeracion {
 
 
 
-    public Double getAporteSocialPermanente(Double sueldoBruto, Integer cantHijos) {
-        return (sueldoBruto * this.aporte_social_empleado_permanente) + (cantHijos * aporte_social_por_hijo);
-    }
-
-    public Double getAsignacionPorHijo(Integer cant_hijos) {
-        return (cant_hijos * asignacion_por_hijo);
-    }
-
-    public Double getAdicionalPorConyuge(EstadoCivil estado_civil){
-        if(estado_civil.estaCasado()){
+    public Double asignacionPorhijo(EmpleadoPermanente empleadoPermanente){
+        if(empleadoPermanente.getEstadoCivil().estaCasado()){
             return this.asignacion_por_conyuge;
         }
 
@@ -59,22 +52,36 @@ public class DetallesDeRenumeracion {
     public Double getAdicionalPorHora(EmpleadoTemporal empleadoTemporal){
         return  (empleadoTemporal.getHorasExtra() * adicional_por_hora);
     }
-    public Double getAporteJubilatorioPermanente(Double sueldoBruto) {
-        return  (sueldoBruto * this.aporte_jubilatorio_planta_permanente);
+
+    public  Double getAportePorAntiguedad(EmpleadoPermanente empleadoPermanente){
+        return  empleadoPermanente.getAntiguedad() * adicional_por_antiguedad;
     }
 
-
-    public  Double getAportePorAntiguedad(Integer antiguedad){
-        return  antiguedad * adicional_por_antiguedad;
-    }
 
     public Double getAporteJubilatorio(EmpleadoTemporal empleadoTemporal) {
         return (empleadoTemporal.getSueldoBruto(this) * aporte_jubilatorio_planta_temporal) + (empleadoTemporal.getHorasExtra() * jubilacionAdicionalPorHora);
     }
     public Double getAporteSocial(EmpleadoTemporal empleadoTemporal) {
-        //return (sueldo * aporte_social_empleado_temporal) + ((anios_de_aporte >= 50) ? adicional_por_antiguedad : 0);
         return (empleadoTemporal.getSueldoBruto(this) * aporte_social_empleado_temporal) + ((empleadoTemporal.getAniosAporte() >= 50) ? adicional_por_antiguedad : 0);
     }
 
 
+    public Double getAporteJubilatorio(EmpleadoPermanente empleadoPermanente) {
+        return empleadoPermanente.getSueldoBruto(this) * aporte_jubilatorio_planta_permanente;
+    }
+
+    public Double getSueldoFamiliar(EmpleadoPermanente empleadoPermanente) {
+        return this.asignacionPorhijo(empleadoPermanente)
+                + this.asignacionPorConyuge(empleadoPermanente)
+                + this.getAportePorAntiguedad(empleadoPermanente);
+    }
+
+    private Double asignacionPorConyuge(EmpleadoPermanente empleadoPermanente) {
+        return empleadoPermanente.getCantidadHijos() * aporte_social_por_hijo;
+    }
+
+    public Double getAporteSocial(EmpleadoPermanente empleadoPermanente) {
+        return  (empleadoPermanente.getSueldoBruto(this) * aporte_social_empleado_permanente)
+                + empleadoPermanente.getCantidadHijos() * aporte_social_por_hijo;
+    }
 }
