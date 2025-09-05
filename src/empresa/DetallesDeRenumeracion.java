@@ -2,7 +2,6 @@ package empresa;
 
 import empleado.EmpleadoPermanente;
 import empleado.EmpleadoTemporal;
-import empleado.EstadoCivil;
 
 public class DetallesDeRenumeracion {
     private  Double adicional_por_hora;
@@ -45,7 +44,11 @@ public class DetallesDeRenumeracion {
     public Double getGastosAdministrativos(){
         return  this.gastos_administrativos;
     }
+
     public Double asignacionPorhijo(EmpleadoPermanente empleadoPermanente){
+        return this.asignacion_por_hijo * empleadoPermanente.getCantidadHijos();
+    }
+    public Double asignacionPorConyuge(EmpleadoPermanente empleadoPermanente){
         if(empleadoPermanente.getEstadoCivil().estaCasado()){
             return this.asignacion_por_conyuge;
         }
@@ -80,9 +83,6 @@ public class DetallesDeRenumeracion {
                 + this.getAportePorAntiguedad(empleadoPermanente);
     }
 
-    private Double asignacionPorConyuge(EmpleadoPermanente empleadoPermanente) {
-        return empleadoPermanente.getCantidadHijos() * aporte_social_por_hijo;
-    }
 
     public Double getAporteSocial(EmpleadoPermanente empleadoPermanente) {
         return  (empleadoPermanente.getSueldoBruto(this) * aporte_social_empleado_permanente)

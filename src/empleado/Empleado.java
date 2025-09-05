@@ -5,10 +5,17 @@ import empresa.DetallesDeRenumeracion;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 public abstract class Empleado {
-    private String nombre, direccion;
-    private GregorianCalendar fecha_nacimiento;
+    private String nombre;
+    private String direccion;
+    private final GregorianCalendar fecha_nacimiento;
     private Double sueldo_basico;
     private EstadoCivil estado_civil;
+
+    public void setNombre(String nombre){this.nombre = nombre;}
+    public void setDireccion(String nueva_dir){ this.direccion = nueva_dir;}
+    public void setSueldo_basico(Double sueldo_basico) {this.sueldo_basico = sueldo_basico;}
+
+
 
     public void cambiarEstadoCivil(EstadoCivil estado_civil){
         this.estado_civil = estado_civil;

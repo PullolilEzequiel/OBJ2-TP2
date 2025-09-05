@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 public class EmpleadoTemporal extends Empleado {
 
     private Integer anios_aporte;
-    private GregorianCalendar fecha_designacion;
+    final GregorianCalendar fecha_fin_designacion;
     private Double horas_extra;
 
     public void agregarAniosDeAporte(){
@@ -22,12 +22,12 @@ public class EmpleadoTemporal extends Empleado {
                             GregorianCalendar fecha_nacimiento,
                             EstadoCivil estado_civil,
                             Double horas_extra,
-                            GregorianCalendar fecha_designacion,
+                            GregorianCalendar fechaFinDesignacion,
                             Integer anios_aporte){
         super(nombre, sueldo_basico, direccion, fecha_nacimiento, estado_civil);
 
         this.horas_extra = horas_extra;
-        this.fecha_designacion = fecha_designacion;
+        fecha_fin_designacion = fechaFinDesignacion;
         this.anios_aporte = anios_aporte;
     }
 
